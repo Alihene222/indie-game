@@ -60,9 +60,11 @@ public class Texture {
             return true;
         }
 
-        if (!(o instanceof Texture t)) {
+        if (!(o instanceof Texture)) {
             return false;
         }
+
+        Texture t = (Texture) o;
 
         return Float.compare(t.handle, this.handle) == 0;
     }

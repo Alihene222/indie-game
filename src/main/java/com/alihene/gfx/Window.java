@@ -119,8 +119,13 @@ public class Window {
 
     public void updateCursor(Mode mode) {
         switch (mode) {
-            case NORMAL -> glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-            case BUILDING, PLANTING -> glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+            case NORMAL:
+                glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+                break;
+            case BUILDING:
+            case PLANTING:
+                glfwSetInputMode(handle, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+                break;
         }
     }
 
