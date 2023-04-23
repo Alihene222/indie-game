@@ -1,0 +1,41 @@
+[
+  {
+    "name": "player0",
+    "path": "player0.png"
+  },
+  {
+    "name": "player1",
+    "path": "player1.png"
+  },
+
+  {
+    "name": "rock",
+    "path": "tile/rock.png"
+  },
+  {
+    "name": "barrier",
+    "path": "tile/barrier.png"
+  },
+  {
+    "name": "soil",
+    "path": "tile/soil.png"
+  },
+
+  {
+    "name": "grass",
+    "path": "plant/grass.png"
+  },
+
+  {
+    "name": "heart",
+    "path": "gui/heart.png"
+  },
+  {
+    "name": "hotbar_slot",
+    "path": "gui/hotbar_slot.png"
+  },
+  {
+    "name": "selector",
+    "path": "gui/selector.png"
+  }
+]
