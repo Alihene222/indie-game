@@ -4,6 +4,8 @@ import com.alihene.Main;
 import com.alihene.gfx.gui.element.GuiSelector;
 import com.alihene.util.Mode;
 import com.alihene.util.Util;
+import com.alihene.world.gameobject.plant.GrassPlant;
+import com.alihene.world.gameobject.player.item.GrassSeedsItem;
 import com.alihene.world.gameobject.tile.SoilTile;
 import org.joml.Vector2f;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
@@ -59,13 +61,28 @@ public class Window {
             @Override
             public void invoke(long l, int button, int action, int mods) {
                 if(button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-                    GuiSelector selector = Main.game.renderSystem.selector;
+                    GuiSelector selector = Main.game.renderSystem.guiCollection.selector;
 
                     selector.getTile().ifPresent(tile -> {
                         if (tile.getClass() == SoilTile.class) {
-                            if((float) Math.sqrt(((float) Math.pow(Util.differenceBetween(tile.pos.x + 1.0f, Main.game.world.player.pos.x + 1.0f), 2)) + (float) Math.pow(Util.differenceBetween(tile.pos.y + 1.0f, Main.game.world.player.pos.y + 1.0f), 2)) < 5.0f) {
+                            if((float) Math.sqrt(((float) Math.pow(Util.differenceBetween(tile.pos.x + 1.0f, Main.game.world.player.pos.x + 1.0f), 2)) + (float) Math.pow(Util.differenceBetween(tile.pos.y + 1.0f, Main.game.world.player.pos.y + 1.0f), 2)) < 7.5f) {
                                 if (((SoilTile) tile).hasPlant()) {
                                     ((SoilTile) tile).removePlant();
+                                }
+                            }
+                        }
+                    });
+                } else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
+                    GuiSelector selector = Main.game.renderSystem.guiCollection.selector;
+
+                    selector.getTile().ifPresent(tile -> {
+                        if (tile.getClass() == SoilTile.class) {
+                            if((float) Math.sqrt(((float) Math.pow(Util.differenceBetween(tile.pos.x + 1.0f, Main.game.world.player.pos.x + 1.0f), 2)) + (float) Math.pow(Util.differenceBetween(tile.pos.y + 1.0f, Main.game.world.player.pos.y + 1.0f), 2)) < 7.5f) {
+                                if (!((SoilTile) tile).hasPlant()) {
+                                    if (Main.game.world.player.getHotbar().hasItem(GrassSeedsItem.class)) {
+                                        Main.game.world.player.getHotbar().decrement(GrassSeedsItem.class);
+                                        ((SoilTile) tile).setPlant(GrassPlant.class);
+                                    }
                                 }
                             }
                         }

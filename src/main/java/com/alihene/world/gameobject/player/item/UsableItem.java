@@ -6,6 +6,8 @@ public abstract class UsableItem extends Item {
     }
 
     public void onUse() {
-        stack.getItems().remove(this);
+        if(stack.isHotbar()) {
+            stack.getItems().remove(this);
+        }
     }
 }

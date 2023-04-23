@@ -1,9 +1,8 @@
 package com.alihene;
 
 import com.alihene.gfx.Animation;
-import com.alihene.world.gameobject.plant.GrassPlant;
-import com.alihene.world.gameobject.plant.Plant;
 import com.alihene.world.gameobject.player.Player;
+import com.alihene.world.gameobject.player.item.GrassSeedsItem;
 import com.alihene.world.gameobject.tile.BarrierTile;
 import com.alihene.world.gameobject.tile.RockTile;
 import com.alihene.world.gameobject.tile.SoilTile;
@@ -47,9 +46,7 @@ public class Main {
 
         game.world.addEntity(game.world.player);
 
-        SoilTile tile = (SoilTile) game.world.tileMap.tiles.stream().filter(t -> t.pos.x == 0.0f && t.pos.y == 0.0f).findFirst().orElseThrow();
-        Plant plant = new GrassPlant(new Vector2f(0.125f, 0.125f), new Vector2f(1.75f, 1.75f));
-        tile.setPlant(plant);
+        game.world.player.getHotbar().addItem(GrassSeedsItem.class, 5);
 
         game.run();
     }

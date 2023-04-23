@@ -1,6 +1,5 @@
 package com.alihene.world.gameobject;
 
-import com.alihene.Main;
 import com.alihene.world.gfx.EntityMesh;
 import org.joml.Vector2f;
 

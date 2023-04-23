@@ -37,5 +37,10 @@
   {
     "name": "selector",
     "path": "gui/selector.png"
+  },
+
+  {
+    "name": "grass_seeds",
+    "path": "item/grass_seeds.png"
   }
 ]

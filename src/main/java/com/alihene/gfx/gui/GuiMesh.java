@@ -60,6 +60,12 @@ public class GuiMesh {
         glEnableVertexAttribArray(2);
     }
 
+    public void mesh() {
+        for(int i = 0; i < elementCount; i++) {
+            meshAt(i);
+        }
+    }
+
     public void meshAt(int index) {
         GuiElement element = elements.get(index);
 
@@ -166,6 +172,23 @@ public class GuiMesh {
 
         elements.add(element);
         elementCount++;
+    }
+
+    public void removeElement(GuiElement element) {
+        boolean removeTexture = true;
+
+        for(GuiElement e : elements) {
+            if(e.getTexture().equals(element.getTexture())) {
+                removeTexture = false;
+            }
+        }
+
+        if(removeTexture) {
+            textures.remove(element.getTexture());
+        }
+
+        elements.remove(element);
+        elementCount--;
     }
 
     public void setShader(Shader shader) {

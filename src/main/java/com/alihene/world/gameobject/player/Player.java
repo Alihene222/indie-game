@@ -3,6 +3,8 @@ package com.alihene.world.gameobject.player;
 import com.alihene.Main;
 import com.alihene.gfx.Window;
 import com.alihene.world.gameobject.Entity;
+import com.alihene.world.gameobject.player.item.Hotbar;
+import com.alihene.world.gameobject.player.item.Inventory;
 import com.alihene.world.gameobject.tile.BarrierTile;
 import com.alihene.world.gameobject.tile.Tile;
 import org.joml.Vector2f;
@@ -12,9 +14,15 @@ import java.util.List;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Player extends Entity {
+    private final Inventory inventory;
+    private final Hotbar hotbar;
+
     public Player(Vector2f pos, Vector2f size) {
         super(pos, size);
         setHealth(10);
+
+        inventory = new Inventory();
+        hotbar = new Hotbar();
     }
 
     @Override
@@ -77,6 +85,9 @@ public class Player extends Entity {
 
             updateMesh();
         }
+
+        hotbar.tick(delta);
+        inventory.tick(delta);
     }
 
     private boolean collidingWithBarrier() {
@@ -93,5 +104,13 @@ public class Player extends Entity {
             }
         }
         return false;
+    }
+
+    public Hotbar getHotbar() {
+        return hotbar;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
     }
 }
