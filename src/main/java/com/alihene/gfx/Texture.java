@@ -13,6 +13,10 @@ public class Texture {
     private final String name;
 
     public Texture(String name, String filePath) {
+        this(name, filePath, Mode.RGBA);
+    }
+
+    public Texture(String name, String filePath, Mode mode) {
         handle = glGenTextures();
         glBindTexture(GL_TEXTURE_2D, handle);
 
@@ -22,7 +26,17 @@ public class Texture {
         ByteBuffer image = stbi_load(filePath, width, height, channels, 4);
 
         if(image != null) {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width.get(0), height.get(0), 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+            switch(mode) {
+                case RGBA:
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.get(0), height.get(0), 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+                    break;
+                case RGB:
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width.get(0), height.get(0), 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+                    break;
+                case RED:
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, width.get(0), height.get(0), 0, GL_RED, GL_UNSIGNED_BYTE, image);
+                    break;
+            }
             glGenerateMipmap(GL_TEXTURE_2D);
 
         } else {
@@ -67,5 +81,11 @@ public class Texture {
         Texture t = (Texture) o;
 
         return Float.compare(t.handle, this.handle) == 0;
+    }
+
+    enum Mode {
+        RGB,
+        RGBA,
+        RED
     }
 }

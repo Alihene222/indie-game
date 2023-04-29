@@ -2,6 +2,7 @@ package com.alihene.gfx.gui;
 
 import com.alihene.gfx.*;
 import com.alihene.gfx.gui.element.GuiElement;
+import com.alihene.gfx.gui.element.text.GuiText;
 import org.joml.Vector2f;
 
 import java.util.ArrayList;
@@ -15,8 +16,11 @@ public class GuiMesh {
     public static final int GUI_MESH_MAX_SIZE = 100;
 
     public final List<GuiElement> elements;
-    public int elementCount;
+    private final List<GuiText> textElements;
+    public int elementCount = 0;
+    public int textElementCount = 0;
     public final float[] data;
+
     public final int[] indices;
 
     private Shader shader;
@@ -29,6 +33,7 @@ public class GuiMesh {
 
     public GuiMesh(RenderSystem renderSystem) {
         elements = new ArrayList<>();
+        textElements = new ArrayList<>();
 
         data = new float[GUI_MESH_MAX_SIZE * GUI_MESH_VERTEX_SIZE * 4];
         indices = new int[GUI_MESH_MAX_SIZE * 6];

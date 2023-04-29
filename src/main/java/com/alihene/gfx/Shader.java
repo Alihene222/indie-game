@@ -1,6 +1,7 @@
 package com.alihene.gfx;
 
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 
 import java.io.BufferedReader;
@@ -84,6 +85,10 @@ public class Shader {
 
     public void setUniformInt(String location, int value) {
         glUniform1i(glGetUniformLocation(handle, location), value);
+    }
+
+    public void setUniformVec3(String location, Vector3f value) {
+        glUniform3f(glGetUniformLocation(handle, location), value.x, value.y, value.z);
     }
 
     private String readFile(String filePath) {
