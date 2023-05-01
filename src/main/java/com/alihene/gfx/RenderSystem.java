@@ -2,15 +2,13 @@ package com.alihene.gfx;
 
 import com.alihene.Main;
 import com.alihene.gfx.gui.GuiCollection;
-import com.alihene.gfx.gui.element.text.GuiText;
-import com.alihene.gfx.gui.element.text.TextMesh;
+import com.alihene.gfx.gui.element.text.TextManager;
 import com.alihene.gfx.util.Camera;
 import com.alihene.util.Util;
 import com.alihene.world.Tickable;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.joml.Vector2f;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +34,7 @@ public class RenderSystem implements Tickable {
 
     public GuiCollection guiCollection;
 
-    private TextMesh textMesh;
+    public final TextManager textManager;
 
     private final TextureSystem textureSystem;
 
@@ -49,12 +47,6 @@ public class RenderSystem implements Tickable {
         shaders[GUI_SHADER] = new Shader("res/shaders/gui.vert", "res/shaders/gui.frag");
         shaders[PLANT_SHADER] = new Shader("res/shaders/plant.vert", "res/shaders/plant.frag");
         shaders[TEXT_SHADER] = new Shader("res/shaders/text.vert", "res/shaders/text.frag");
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        // No interpolation due to the game being pixel based
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
         glEnable(GL_MULTISAMPLE);
 
@@ -71,13 +63,7 @@ public class RenderSystem implements Tickable {
         textureSystem = new TextureSystem();
         textureSystem.loadTextures();
 
-        textMesh = new TextMesh(this);
-        textMesh.setShader(shaders[TEXT_SHADER]);
-        textMesh.prepareRender();
-        GuiText text = new GuiText(new Vector2f(0.0f, 0.0f), 0.5f);
-        text.setString("abcdefghijklmop");
-        textMesh.addElement(text);
-        textMesh.meshAt(0);
+        textManager = new TextManager();
     }
 
     public void render() {
@@ -85,7 +71,7 @@ public class RenderSystem implements Tickable {
 
         Main.game.world.render();
         guiCollection.render();
-        textMesh.render();
+//        textMesh.render();
 
         glfwSwapBuffers(window.getHandle());
         glfwPollEvents();

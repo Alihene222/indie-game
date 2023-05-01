@@ -38,6 +38,10 @@
     "name": "selector",
     "path": "gui/selector.png"
   },
+  {
+    "name": "text",
+    "path": "gui/text.png"
+  },
 
   {
     "name": "grass_seeds",

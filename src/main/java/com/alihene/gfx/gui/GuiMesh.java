@@ -16,9 +16,7 @@ public class GuiMesh {
     public static final int GUI_MESH_MAX_SIZE = 100;
 
     public final List<GuiElement> elements;
-    private final List<GuiText> textElements;
     public int elementCount = 0;
-    public int textElementCount = 0;
     public final float[] data;
 
     public final int[] indices;
@@ -33,7 +31,6 @@ public class GuiMesh {
 
     public GuiMesh(RenderSystem renderSystem) {
         elements = new ArrayList<>();
-        textElements = new ArrayList<>();
 
         data = new float[GUI_MESH_MAX_SIZE * GUI_MESH_VERTEX_SIZE * 4];
         indices = new int[GUI_MESH_MAX_SIZE * 6];
@@ -80,7 +77,7 @@ public class GuiMesh {
 
         if (element.getTexture() != null) {
             for (int i = 0; i < textures.size(); i++) {
-                if (textures.get(i) == element.getTexture()) {
+                if (textures.get(i).equals(element.getTexture())) {
                     texId = i % 16;
                 }
             }
@@ -110,8 +107,8 @@ public class GuiMesh {
             data[offset + 1] = element.pos.y + (yAdd * element.size.y);
             data[offset + 2] = 0.0f;
 
-            data[offset + 3] = xAdd;
-            data[offset + 4] = yAdd;
+            data[offset + 3] = ((xAdd / 16.0f) * element.textureSize.x) + (element.texturePos.x / 16.0f);
+            data[offset + 4] = ((yAdd / 16.0f) * element.textureSize.y) + (element.texturePos.y / 16.0f);
 
             data[offset + 5] = texId;
 

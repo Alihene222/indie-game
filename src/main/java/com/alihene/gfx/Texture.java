@@ -1,5 +1,6 @@
 package com.alihene.gfx;
 
+import org.joml.Vector2i;
 import org.lwjgl.BufferUtils;
 
 import java.nio.ByteBuffer;
@@ -9,8 +10,11 @@ import static org.lwjgl.opengl.GL33.*;
 import static org.lwjgl.stb.STBImage.*;
 
 public class Texture {
-    private int handle;
+    private final int handle;
     private final String name;
+
+    public Vector2i size = new Vector2i(16, 16);
+    public Vector2i pos = new Vector2i(0, 0);
 
     public Texture(String name, String filePath) {
         this(name, filePath, Mode.RGBA);
@@ -26,6 +30,7 @@ public class Texture {
         ByteBuffer image = stbi_load(filePath, width, height, channels, 4);
 
         if(image != null) {
+
             switch(mode) {
                 case RGBA:
                     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.get(0), height.get(0), 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
@@ -37,11 +42,15 @@ public class Texture {
                     glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, width.get(0), height.get(0), 0, GL_RED, GL_UNSIGNED_BYTE, image);
                     break;
             }
-            glGenerateMipmap(GL_TEXTURE_2D);
-
         } else {
             throw new RuntimeException("Could not load image from path " + filePath);
         }
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+        // No interpolation due to the game beingas pixel based
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
         stbi_image_free(image);
 
@@ -60,10 +69,6 @@ public class Texture {
         glActiveTexture(GL_TEXTURE0 + offset);
     }
 
-    public int getHandle() {
-        return handle;
-    }
-
     public String getName() {
         return name;
     }
@@ -80,7 +85,7 @@ public class Texture {
 
         Texture t = (Texture) o;
 
-        return Float.compare(t.handle, this.handle) == 0;
+        return Float.compare(t.handle, this.handle) == 0 && t.pos == this.pos && t.size == this.size;
     }
 
     enum Mode {
