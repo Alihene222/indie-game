@@ -92,7 +92,7 @@ public class Player extends Entity {
 
     private boolean collidingWithBarrier() {
         // Quick optimization hack
-        List<Tile> barriers = Main.game.world.tileMap.tiles.stream().filter(tile -> tile.getClass().equals(BarrierTile.class) && tile.pos.x < pos.x && tile.pos.x + tile.size.x > pos.x).toList();
+        List<Tile> barriers = Main.game.world.tileMap.tiles.stream().filter(tile -> tile.getClass().equals(BarrierTile.class)).toList();
         for (Tile barrier : barriers) {
             if(
                     barrier.pos.x < pos.x + size.x &&
