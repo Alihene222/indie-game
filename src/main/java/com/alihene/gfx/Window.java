@@ -10,6 +10,7 @@ import com.alihene.world.gameobject.tile.SoilTile;
 import org.joml.Vector2f;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
+import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL33;
@@ -87,6 +88,15 @@ public class Window {
                             }
                         }
                     });
+                }
+            }
+        });
+
+        glfwSetKeyCallback(handle, new GLFWKeyCallback() {
+            @Override
+            public void invoke(long win, int key, int scancode, int action, int mods) {
+                if(key == GLFW_KEY_F && action == GLFW_PRESS) {
+                    Main.game.renderSystem.guiCollection.fpsIndicator.updateString("Text has changed! Oh no!");
                 }
             }
         });

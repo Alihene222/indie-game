@@ -12,7 +12,7 @@ public class RockTile extends Tile {
     }
 
     @Override
-    public void tick(float delta) {
+    public void tick() {
 
     }
 }

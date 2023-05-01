@@ -10,7 +10,7 @@ public class GrassPlant extends Herb {
     }
 
     @Override
-    public void tick(float delta) {
+    public void tick() {
 
     }
 }

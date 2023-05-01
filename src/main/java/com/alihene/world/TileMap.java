@@ -59,9 +59,9 @@ public class TileMap implements Tickable {
     }
 
     @Override
-    public void tick(float delta) {
+    public void tick() {
         for(Tile tile : tiles) {
-            tile.tick(delta);
+            tile.tick();
         }
     }
 }

@@ -64,7 +64,7 @@ public class Inventory implements Tickable {
     }
 
     @Override
-    public void tick(float delta) {
+    public void tick() {
         // Key presses
     }
 }

@@ -96,7 +96,7 @@ public class Hotbar implements Tickable {
     }
 
     @Override
-    public void tick(float delta) {
+    public void tick() {
         if(updated) {
             RenderSystem renderSystem = Main.game.renderSystem;
 

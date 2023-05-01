@@ -1,5 +1,6 @@
 package com.alihene.gfx.gui.element;
 
+import com.alihene.gfx.gui.GuiCollection;
 import com.alihene.gfx.gui.GuiMesh;
 import com.alihene.world.gameobject.Gameobject;
 import org.joml.Vector2f;
@@ -22,7 +23,7 @@ public abstract class GuiElement extends Gameobject {
     }
 
     @Override
-    public void tick(float delta) {
+    public void tick() {
 
     }
 }

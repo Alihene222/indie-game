@@ -9,7 +9,7 @@ public class GrassTile extends Tile {
     }
 
     @Override
-    public void tick(float delta) {
+    public void tick() {
 
     }
 }

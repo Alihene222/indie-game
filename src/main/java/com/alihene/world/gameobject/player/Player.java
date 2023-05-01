@@ -26,11 +26,11 @@ public class Player extends Entity {
     }
 
     @Override
-    public void tick(float delta) {
+    public void tick() {
         if(mesh != null && index > -1) {
             boolean anyPressed = false;
 
-            float speed = 10.0f;
+            float speed = 0.2f;
 
             Window window = Main.game.window;
 
@@ -40,37 +40,37 @@ public class Player extends Entity {
 
             if (window.keyPressed(GLFW_KEY_W)) {
                 anyPressed = true;
-                pos.y += speed * delta;
+                pos.y += speed;
                 if(collidingWithBarrier()) {
                     while(collidingWithBarrier()) {
-                        pos.y -= delta;
+                        pos.y -= 0.01f;
                     }
                 }
             }
             if (window.keyPressed(GLFW_KEY_S)) {
                 anyPressed = true;
-                pos.y -= speed * delta;
+                pos.y -= speed;
                 if(collidingWithBarrier()) {
                     while(collidingWithBarrier()) {
-                        pos.y += delta;
+                        pos.y += 0.01f;
                     }
                 }
             }
             if (window.keyPressed(GLFW_KEY_A)) {
                 anyPressed = true;
-                pos.x -= speed * delta;
+                pos.x -= speed;
                 if(collidingWithBarrier()) {
                     while(collidingWithBarrier()) {
-                        pos.x += delta;
+                        pos.x += 0.01f;
                     }
                 }
             }
             if (window.keyPressed(GLFW_KEY_D)) {
                 anyPressed = true;
-                pos.x += speed * delta;
+                pos.x += speed;
                 if(collidingWithBarrier()) {
                     while(collidingWithBarrier()) {
-                        pos.x -= delta;
+                        pos.x -= 0.01f;
                     }
                 }
             }
@@ -86,8 +86,8 @@ public class Player extends Entity {
             updateMesh();
         }
 
-        hotbar.tick(delta);
-        inventory.tick(delta);
+        hotbar.tick();
+        inventory.tick();
     }
 
     private boolean collidingWithBarrier() {

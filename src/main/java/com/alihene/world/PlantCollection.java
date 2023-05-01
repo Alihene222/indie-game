@@ -57,9 +57,9 @@ public class PlantCollection implements Tickable {
     }
 
     @Override
-    public void tick(float delta) {
+    public void tick() {
         for(Plant plant : plants) {
-            plant.tick(delta);
+            plant.tick();
         }
     }
 }

@@ -10,7 +10,6 @@ import java.util.Optional;
 
 public class GuiSelector extends GuiElement {
     private final Vector2f lastPos;
-    public GuiCollection guiCollection;
 
     private boolean hidden;
 
@@ -27,7 +26,7 @@ public class GuiSelector extends GuiElement {
     }
 
     @Override
-    public void tick(float delta) {
+    public void tick() {
         Window window = Main.game.window;
 
         Optional<Tile> tileOptional = Main.game.world.tileMap.tiles.stream().filter(t ->

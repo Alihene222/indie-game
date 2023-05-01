@@ -14,7 +14,7 @@ public class SoilTile extends Tile {
     }
 
     @Override
-    public void tick(float delta) {
+    public void tick() {
 
     }
 

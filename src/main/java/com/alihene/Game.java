@@ -28,23 +28,41 @@ public class Game {
         world.update();
     }
 
-    private void tick(float delta) {
-        world.tick(delta);
-        renderSystem.tick(delta);
+    private void tick() {
+        world.tick();
+        renderSystem.tick();
     }
 
     public void run() {
-        float delta;
-        float lastFrame = 0.0f;
+        long lastTime = System.nanoTime();
+        double amountOfTicks = 60.0;
+        double ns = 1000000000 / amountOfTicks;
+        double delta = 0;
+        long timer = System.currentTimeMillis();
+        int updates = 0;
+        int frames = 0;
 
         while(!window.shouldClose()) {
-            float currentFrame = (float) glfwGetTime();
-            delta = currentFrame - lastFrame;
-            lastFrame = currentFrame;
+            long now = System.nanoTime();
+            delta += (now - lastTime) / ns;
+            lastTime = now;
+
+            while(delta >= 1) {
+                tick();
+                updates++;
+                delta--;
+            }
 
             update();
-            tick(delta);
             renderSystem.render();
+            frames++;
+
+            if(System.currentTimeMillis() - timer > 1000) {
+                timer += 1000;
+                renderSystem.guiCollection.fpsIndicator.updateString("FPS: " + frames);
+                frames = 0;
+                updates = 0;
+            }
         }
 
         window.terminate();

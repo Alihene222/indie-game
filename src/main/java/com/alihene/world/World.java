@@ -19,10 +19,10 @@ public class World implements Tickable, Updatable {
     }
 
     @Override
-    public void tick(float delta) {
-        tileMap.tick(delta);
-        entityCollection.tick(delta);
-        plantCollection.tick(delta);
+    public void tick() {
+        tileMap.tick();
+        entityCollection.tick();
+        plantCollection.tick();
     }
 
     @Override

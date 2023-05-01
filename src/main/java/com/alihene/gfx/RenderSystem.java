@@ -95,9 +95,9 @@ public class RenderSystem implements Tickable {
     }
 
     @Override
-    public void tick(float delta) {
-        camera.tick(delta);
-        guiCollection.tick(delta);
+    public void tick() {
+        camera.tick();
+        guiCollection.tick();
     }
 }
 

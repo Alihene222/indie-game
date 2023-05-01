@@ -8,7 +8,7 @@ public class GuiImage extends GuiElement {
     }
 
     @Override
-    public void tick(float delta) {
+    public void tick() {
 
     }
 }

@@ -46,7 +46,7 @@ public class Camera implements Tickable {
     }
 
     @Override
-    public void tick(float delta) {
+    public void tick() {
         Player player = Main.game.world.player;
         position.x = player.pos.x - 10.0f + player.size.x / 2.0f;
         position.y = player.pos.y - 10.0f + player.size.y / 2.0f;

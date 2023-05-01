@@ -55,9 +55,9 @@ public class EntityCollection implements Tickable, Updatable {
     }
 
     @Override
-    public void tick(float delta) {
+    public void tick() {
         for (Entity entity : entities) {
-            entity.tick(delta);
+            entity.tick();
         }
     }
 
