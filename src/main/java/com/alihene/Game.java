@@ -2,8 +2,12 @@ package com.alihene;
 
 import com.alihene.gfx.RenderSystem;
 import com.alihene.gfx.Window;
+import com.alihene.util.FrameTask;
 import com.alihene.util.Mode;
 import com.alihene.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
     public Window window;
@@ -11,6 +15,8 @@ public class Game {
     public World world;
 
     public Mode mode;
+
+    private List<FrameTask> frameTasks;
 
     public void createWindow(String name, int width, int height, boolean resizable) {
         window = new Window(name, width, height, resizable);
@@ -20,11 +26,16 @@ public class Game {
         renderSystem.initGui();
         world = new World();
         mode = Mode.NORMAL;
+
+        frameTasks = new ArrayList<>();
     }
 
     private void tick() {
         world.tick();
         renderSystem.tick();
+        for(FrameTask frameTask : frameTasks) {
+            frameTask.tick();
+        }
     }
 
     public void run() {
@@ -68,5 +79,9 @@ public class Game {
     public void setMode(Mode mode) {
         this.mode = mode;
         window.updateCursor(mode);
+    }
+
+    public void submitFrameTask(FrameTask task) {
+        frameTasks.add(task);
     }
 }

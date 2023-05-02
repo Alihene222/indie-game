@@ -115,8 +115,10 @@ public class PlantMesh {
             data[offset + 1] = plant.pos.y + (yAdd * plant.size.y);
             data[offset + 2] = 0.0f;
 
-            data[offset + 3] = xAdd;
-            data[offset + 4] = yAdd;
+            data[offset + 3] = ((xAdd / plant.getTextureInfo().totalSize.x) * plant.getTextureInfo().size.x) + ((float) plant.getTextureInfo().pos.x / plant.getTextureInfo().totalSize.x);
+            data[offset + 4] = ((yAdd / plant.getTextureInfo().totalSize.y) * plant.getTextureInfo().size.y) + ((float) plant.getTextureInfo().pos.y / plant.getTextureInfo().totalSize.y);
+
+            System.out.println(plant.getTextureInfo().pos);
 
             data[offset + 5] = texId;
 

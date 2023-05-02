@@ -33,7 +33,7 @@ public class Util {
         return text.toString();
     }
 
-    public boolean randomChanceOneIn(int range) {
+    public static boolean randomChanceOneIn(int range) {
         return ThreadLocalRandom.current().nextInt(range) == 0;
     }
 }

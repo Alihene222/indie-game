@@ -108,8 +108,8 @@ public class EntityMesh {
             data[offset + 1] = entity.pos.y + (yAdd * entity.size.y);
             data[offset + 2] = 0.0f;
 
-            data[offset + 3] = xAdd;
-            data[offset + 4] = yAdd;
+            data[offset + 3] = ((xAdd / entity.getTextureInfo().totalSize.x) * entity.getTextureInfo().size.x) + ((float) entity.getTextureInfo().pos.x / entity.getTextureInfo().totalSize.x);
+            data[offset + 4] = ((yAdd / entity.getTextureInfo().totalSize.y) * entity.getTextureInfo().size.y) + ((float) entity.getTextureInfo().pos.y / entity.getTextureInfo().totalSize.y);
 
             data[offset + 5] = texId;
 

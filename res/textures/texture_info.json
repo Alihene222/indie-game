@@ -25,6 +25,10 @@
     "name": "grass",
     "path": "plant/grass.png"
   },
+  {
+    "name": "plants",
+    "path": "plant/plants.png"
+  },
 
   {
     "name": "heart",

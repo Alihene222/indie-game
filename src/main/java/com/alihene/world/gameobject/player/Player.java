@@ -8,6 +8,7 @@ import com.alihene.world.gameobject.player.item.Inventory;
 import com.alihene.world.gameobject.tile.BarrierTile;
 import com.alihene.world.gameobject.tile.Tile;
 import org.joml.Vector2f;
+import org.joml.Vector2i;
 
 import java.util.List;
 

@@ -82,7 +82,7 @@ public class Window {
                                 if (!((SoilTile) tile).hasPlant()) {
                                     if (Main.game.world.player.getHotbar().hasItem(GrassSeedsItem.class)) {
                                         Main.game.world.player.getHotbar().decrement(GrassSeedsItem.class);
-                                        ((SoilTile) tile).setPlant(GrassPlant.class);
+                                        ((SoilTile) tile).setPlant(GrassPlant.class, GrassPlant.SEEDS_TEXTURE);
                                     }
                                 }
                             }

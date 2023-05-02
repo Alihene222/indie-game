@@ -14,6 +14,7 @@ public abstract class Gameobject implements Tickable {
     private float rotationAngle;
     private Texture texture;
     private Texture defaultTexture;
+    private Texture.Info textureInfo = new Texture.Info();
 
     public Animation animation = null;
     public final List<Animation> animations;
@@ -55,6 +56,14 @@ public abstract class Gameobject implements Tickable {
 
     public void useDefaultTexture() {
         texture = defaultTexture;
+    }
+
+    public Texture.Info getTextureInfo() {
+        return textureInfo;
+    }
+
+    public void setTextureInfo(Texture.Info textureInfo) {
+        this.textureInfo = textureInfo;
     }
 
     @Override

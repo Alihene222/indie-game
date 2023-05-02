@@ -88,6 +88,24 @@ public class Texture {
         return Float.compare(t.handle, this.handle) == 0 && t.pos == this.pos && t.size == this.size;
     }
 
+    public static class Info {
+        public Vector2i pos;
+        public Vector2i size;
+        public Vector2i totalSize;
+
+        public Info() {
+            pos = new Vector2i(0, 0);
+            size = new Vector2i(16, 16);
+            totalSize = new Vector2i(16, 16);
+        }
+
+        public Info(Vector2i pos, Vector2i size, Vector2i totalSize) {
+            this.pos = pos;
+            this.size = size;
+            this.totalSize = totalSize;
+        }
+    }
+
     enum Mode {
         RGB,
         RGBA,

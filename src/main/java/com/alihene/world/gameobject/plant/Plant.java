@@ -16,6 +16,6 @@ public abstract class Plant extends Gameobject {
 
     @Override
     public void updateMesh() {
-
+        mesh.meshAt(index);
     }
 }

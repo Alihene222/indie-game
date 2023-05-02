@@ -1,6 +1,10 @@
 package com.alihene;
 
 import com.alihene.gfx.Animation;
+import com.alihene.util.FrameTask;
+import com.alihene.util.Util;
+import com.alihene.world.gameobject.plant.GrassPlant;
+import com.alihene.world.gameobject.plant.Plant;
 import com.alihene.world.gameobject.player.Player;
 import com.alihene.world.gameobject.player.item.GrassSeedsItem;
 import com.alihene.world.gameobject.tile.BarrierTile;
@@ -8,6 +12,8 @@ import com.alihene.world.gameobject.tile.RockTile;
 import com.alihene.world.gameobject.tile.SoilTile;
 import com.alihene.world.gameobject.tile.Tile;
 import org.joml.Vector2f;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
     public static Game game;
@@ -47,6 +53,19 @@ public class Main {
         game.world.addEntity(game.world.player);
 
         game.world.player.getHotbar().addItem(GrassSeedsItem.class, 5);
+
+        FrameTask task = new FrameTask(250);
+        task.setAction(249, () -> {
+            if(!game.world.plantCollection.plants.isEmpty()) {
+                //TODO: try again if plant is already fully grown
+                int index = (int) (Math.random() * game.world.plantCollection.plants.size());
+                Plant plant = game.world.plantCollection.plants.get(index);
+                plant.setTextureInfo(GrassPlant.FULL_GROWN_TEXTURE);
+                plant.updateMesh();
+            }
+        });
+
+        game.submitFrameTask(task);
 
         game.run();
     }
