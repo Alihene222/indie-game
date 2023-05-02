@@ -13,11 +13,15 @@ public class VertexBuffer {
         glBindBuffer(GL_ARRAY_BUFFER, handle);
     }
 
-    public void unbind() {
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-    }
-
     public void buffer(float[] data, boolean dynamic) {
         glBufferData(GL_ARRAY_BUFFER, data, dynamic ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW);
+    }
+
+    public void buffer(long count, boolean dynamic) {
+        glBufferData(GL_ARRAY_BUFFER, count * Float.BYTES, dynamic ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW);
+    }
+
+    public void bufferSub(float[] data) {
+        glBufferSubData(GL_ARRAY_BUFFER, 0, data);
     }
 }

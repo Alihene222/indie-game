@@ -25,6 +25,8 @@ public class TileMesh {
 
     private final List<Texture> textures;
 
+    private boolean shouldBuffer = false;
+
     private final RenderSystem renderSystem;
 
     public TileMesh() {
@@ -45,7 +47,7 @@ public class TileMesh {
         vao.bind();
 
         vbo.bind();
-        vbo.buffer(data, false);
+        vbo.buffer(TILE_MESH_MAX_SIZE * TILE_MESH_VERTEX_SIZE * 4, false);
 
         IndexBuffer ibo = new IndexBuffer();
         ibo.bind();
@@ -61,6 +63,10 @@ public class TileMesh {
     }
 
     public void meshAt(int index) {
+        if(!shouldBuffer) {
+            shouldBuffer = true;
+        }
+
         Tile tile = tiles.get(index);
 
         int texId = 16;
@@ -113,8 +119,11 @@ public class TileMesh {
     }
 
     public void render() {
-        vbo.bind();
-        vbo.buffer(data, false);
+        if(shouldBuffer) {
+            vbo.bind();
+            vbo.bufferSub(data);
+            shouldBuffer = false;
+        }
 
         int iterations;
         iterations = (int) Math.ceil((float) textures.size() / 16.0f);
