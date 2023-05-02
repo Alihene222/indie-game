@@ -89,12 +89,14 @@ public class GuiCollection implements Tickable {
 
         for (GuiMesh mesh : meshes) {
             if (mesh.elementCount < GuiMesh.GUI_MESH_MAX_SIZE) {
-                mesh.addElement(element);
-                element.mesh = mesh;
-                element.index = mesh.elementCount - 1;
-                mesh.meshAt(element.index);
-                added = true;
-                break;
+                if(mesh.textures.size() < 16 || mesh.textures.contains(element.getTexture())) {
+                    mesh.addElement(element);
+                    element.mesh = mesh;
+                    element.index = mesh.elementCount - 1;
+                    mesh.meshAt(element.index);
+                    added = true;
+                    break;
+                }
             }
         }
 

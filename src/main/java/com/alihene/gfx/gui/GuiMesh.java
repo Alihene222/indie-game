@@ -24,8 +24,9 @@ public class GuiMesh {
     private Shader shader;
     private final VertexArray vao;
     private final VertexBuffer vbo;
+    private boolean shouldBuffer = false;
 
-    private final List<Texture> textures;
+    final List<Texture> textures;
 
     private final RenderSystem renderSystem;
 
@@ -47,7 +48,7 @@ public class GuiMesh {
         vao.bind();
 
         vbo.bind();
-        vbo.buffer(data, true);
+        vbo.buffer(GUI_MESH_MAX_SIZE * GUI_MESH_VERTEX_SIZE * 4, true);
 
         IndexBuffer ibo = new IndexBuffer();
         ibo.bind();
@@ -70,6 +71,10 @@ public class GuiMesh {
 
     public void meshAt(int index) {
         GuiElement element = elements.get(index);
+
+        if(!shouldBuffer) {
+            shouldBuffer = true;
+        }
 
         int texId = 16;
 
@@ -117,8 +122,11 @@ public class GuiMesh {
     }
 
     public void render() {
-        vbo.bind();
-        vbo.buffer(data, true);
+        if(shouldBuffer) {
+            vbo.bind();
+            vbo.bufferSub(data);
+            shouldBuffer = false;
+        }
 
         int iterations;
         iterations = (int) Math.ceil((float) textures.size() / 16.0f);
@@ -191,6 +199,10 @@ public class GuiMesh {
 
         elements.remove(element);
         elementCount--;
+
+        for(int i = 0; i < elementCount; i++) {
+            elements.get(i).index = i;
+        }
     }
 
     public void setShader(Shader shader) {

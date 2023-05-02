@@ -27,12 +27,14 @@ public class TileMap implements Tickable {
 
         for(TileMesh mesh : meshes) {
             if(mesh.tileCount < TileMesh.TILE_MESH_MAX_SIZE) {
-                mesh.addTile(tile);
-                tile.mesh = mesh;
-                tile.index = mesh.tileCount - 1;
-                mesh.meshAt(tile.index);
-                added = true;
-                break;
+                if(mesh.textures.size() < 16 || mesh.textures.contains(tile.getTexture())) {
+                    mesh.addTile(tile);
+                    tile.mesh = mesh;
+                    tile.index = mesh.tileCount - 1;
+                    mesh.meshAt(tile.index);
+                    added = true;
+                    break;
+                }
             }
         }
 

@@ -27,12 +27,14 @@ public class EntityCollection implements Tickable {
 
         for(EntityMesh mesh : meshes) {
             if(mesh.entityCount < EntityMesh.ENTITY_MESH_MAX_SIZE) {
-                mesh.addEntity(entity);
-                entity.mesh = mesh;
-                entity.index = mesh.entityCount - 1;
-                mesh.meshAt(entity.index);
-                added = true;
-                break;
+                if(mesh.textures.size() < 16 || mesh.textures.contains(entity.getTexture())) {
+                    mesh.addEntity(entity);
+                    entity.mesh = mesh;
+                    entity.index = mesh.entityCount - 1;
+                    mesh.meshAt(entity.index);
+                    added = true;
+                    break;
+                }
             }
         }
 

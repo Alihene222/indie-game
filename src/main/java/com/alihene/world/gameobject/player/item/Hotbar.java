@@ -139,9 +139,6 @@ public class Hotbar implements Tickable {
             }
 
             for(GuiMesh mesh : meshes) {
-                for(int i = 0; i < mesh.elementCount; i++) {
-                    mesh.elements.get(i).index = i;
-                }
                 mesh.mesh();
             }
 

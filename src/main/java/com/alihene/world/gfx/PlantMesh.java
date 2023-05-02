@@ -24,7 +24,7 @@ public class PlantMesh {
     private final VertexBuffer vbo;
     private boolean shouldBuffer = false;
 
-    private final List<Texture> textures;
+    public final List<Texture> textures;
 
     private final RenderSystem renderSystem;
 

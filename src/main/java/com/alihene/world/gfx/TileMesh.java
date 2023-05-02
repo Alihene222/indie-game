@@ -23,7 +23,7 @@ public class TileMesh {
     private final VertexArray vao;
     private final VertexBuffer vbo;
 
-    private final List<Texture> textures;
+    public final List<Texture> textures;
 
     private boolean shouldBuffer = false;
 

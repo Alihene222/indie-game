@@ -33,13 +33,15 @@ public class PlantCollection implements Tickable {
 
         for(PlantMesh mesh : meshes) {
             if(mesh.plantCount < PlantMesh.PLANT_MESH_MAX_SIZE) {
-                mesh.addPlant(plant);
-                plant.plantCollection = this;
-                plant.mesh = mesh;
-                plant.index = mesh.plantCount - 1;
-                mesh.meshAt(plant.index);
-                added = true;
-                break;
+                if(mesh.textures.size() < 16 || mesh.textures.contains(plant.getTexture())) {
+                    mesh.addPlant(plant);
+                    plant.plantCollection = this;
+                    plant.mesh = mesh;
+                    plant.index = mesh.plantCount - 1;
+                    mesh.meshAt(plant.index);
+                    added = true;
+                    break;
+                }
             }
         }
 
