@@ -27,6 +27,8 @@ public class Player extends Entity {
 
     @Override
     public void tick() {
+        super.tick();
+
         if(mesh != null && index > -1) {
             boolean anyPressed = false;
 

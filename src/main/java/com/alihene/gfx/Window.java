@@ -110,6 +110,7 @@ public class Window {
 
     public void initOpenGL() {
         glfwMakeContextCurrent(handle);
+        glfwSwapInterval(0);
         GL.createCapabilities();
     }
 

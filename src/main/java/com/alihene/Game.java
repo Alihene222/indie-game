@@ -5,8 +5,6 @@ import com.alihene.gfx.Window;
 import com.alihene.util.Mode;
 import com.alihene.world.World;
 
-import static org.lwjgl.glfw.GLFW.*;
-
 public class Game {
     public Window window;
     public RenderSystem renderSystem;
@@ -22,10 +20,6 @@ public class Game {
         renderSystem.initGui();
         world = new World();
         mode = Mode.NORMAL;
-    }
-
-    private void update() {
-        world.update();
     }
 
     private void tick() {
@@ -53,7 +47,6 @@ public class Game {
                 delta--;
             }
 
-            update();
             renderSystem.render();
             frames++;
 

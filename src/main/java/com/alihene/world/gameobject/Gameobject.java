@@ -3,13 +3,12 @@ package com.alihene.world.gameobject;
 import com.alihene.gfx.Animation;
 import com.alihene.gfx.Texture;
 import com.alihene.world.Tickable;
-import com.alihene.world.Updatable;
 import org.joml.Vector2f;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Gameobject implements Tickable, Updatable {
+public abstract class Gameobject implements Tickable {
     public Vector2f pos;
     public Vector2f size;
     private float rotationAngle;
@@ -59,7 +58,7 @@ public abstract class Gameobject implements Tickable, Updatable {
     }
 
     @Override
-    public void update() {
+    public void tick() {
         if(animation != null) {
             animation.update();
         }

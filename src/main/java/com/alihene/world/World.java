@@ -6,7 +6,7 @@ import com.alihene.world.gameobject.tile.Tile;
 
 import java.util.Optional;
 
-public class World implements Tickable, Updatable {
+public class World implements Tickable {
     public Player player;
     public final EntityCollection entityCollection;
     public final TileMap tileMap;
@@ -23,11 +23,6 @@ public class World implements Tickable, Updatable {
         tileMap.tick();
         entityCollection.tick();
         plantCollection.tick();
-    }
-
-    @Override
-    public void update() {
-        entityCollection.update();
     }
 
     public void render() {

@@ -8,7 +8,7 @@ import com.alihene.world.gfx.EntityMesh;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityCollection implements Tickable, Updatable {
+public class EntityCollection implements Tickable {
     private final List<Entity> entities;
     public final List<EntityMesh> meshes;
 
@@ -58,13 +58,6 @@ public class EntityCollection implements Tickable, Updatable {
     public void tick() {
         for (Entity entity : entities) {
             entity.tick();
-        }
-    }
-
-    @Override
-    public void update() {
-        for(Entity entity : entities) {
-            entity.update();
         }
     }
 }
