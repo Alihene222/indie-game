@@ -16,4 +16,9 @@ public class VertexArray {
     public void unbind() {
         glBindVertexArray(0);
     }
+
+    public void attrib(int index, int size, int type, int stride, long pointer) {
+        glVertexAttribPointer(index, size, type, false, stride, pointer);
+        glEnableVertexAttribArray(0);
+    }
 }

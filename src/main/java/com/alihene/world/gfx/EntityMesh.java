@@ -22,6 +22,7 @@ public class EntityMesh {
     private Shader shader;
     private final VertexArray vao;
     private final VertexBuffer vbo;
+    private boolean shouldBuffer = false;
 
     public final List<Texture> textures;
 
@@ -45,7 +46,7 @@ public class EntityMesh {
         vao.bind();
 
         vbo.bind();
-        vbo.buffer(data, true);
+        vbo.buffer(ENTITY_MESH_MAX_SIZE * ENTITY_MESH_VERTEX_SIZE * 4, true);
 
         IndexBuffer ibo = new IndexBuffer();
         ibo.bind();
@@ -62,6 +63,10 @@ public class EntityMesh {
 
     public void meshAt(int index) {
         Entity entity = entities.get(index);
+
+        if(!shouldBuffer) {
+            shouldBuffer = true;
+        }
 
         int texId = 16;
 
@@ -113,8 +118,11 @@ public class EntityMesh {
     }
 
     public void render() {
-        vbo.bind();
-        vbo.buffer(data, true);
+        if(shouldBuffer) {
+            vbo.bind();
+            vbo.bufferSub(data);
+            shouldBuffer = false;
+        }
 
         int iterations;
         iterations = (int) Math.ceil((float) textures.size() / 16.0f);

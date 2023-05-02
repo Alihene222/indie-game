@@ -33,27 +33,62 @@ public class GuiText {
     }
 
     public void updateString(String string) {
+        if(string == this.string) {
+            return;
+        }
+
+        float currentAdvances = 0.0f;
+        float newAdvances = 0.0f;
+
+        for(char c : this.string.toCharArray()) {
+            if(c != 32) {
+                currentAdvances += Main.game.renderSystem.textManager.get(c).getAdvance();
+            } else {
+                currentAdvances += 0.65f;
+            }
+        }
+
+        for(char c : string.toCharArray()) {
+            if(c != 32) {
+                newAdvances += Main.game.renderSystem.textManager.get(c).getAdvance();
+            } else {
+                newAdvances += 0.65f;
+            }
+        }
+
         this.string = string;
 
-        List<GuiMesh> meshes = new ArrayList<>();
+        if(newAdvances != currentAdvances) {
+            List<GuiMesh> meshes = new ArrayList<>();
 
-        for(GuiImage image : images) {
-            if(!meshes.contains(image.mesh)) {
-                meshes.add(image.mesh);
+            for (GuiImage image : images) {
+                if (!meshes.contains(image.mesh)) {
+                    meshes.add(image.mesh);
+                }
+                Main.game.renderSystem.guiCollection.removeElement(image);
             }
-            Main.game.renderSystem.guiCollection.removeElement(image);
-        }
 
-        for(GuiMesh mesh : meshes) {
-            mesh.mesh();
-        }
+            images.clear();
 
-        images.clear();
+            updateImages(Main.game.renderSystem);
 
-        updateImages(Main.game.renderSystem);
+            for (GuiImage image : images) {
+                Main.game.renderSystem.guiCollection.addElementToMesh(image);
+            }
 
-        for(GuiImage image : images) {
-            Main.game.renderSystem.guiCollection.addElementToMesh(image);
+            for (GuiMesh mesh : meshes) {
+                mesh.mesh();
+            }
+        } else {
+            int i = 0;
+            for(char c : string.toCharArray()) {
+                if(c != 32) {
+                    GuiCharacter character = Main.game.renderSystem.textManager.get(c);
+                    images.get(i).texturePos = character.getTexturePos();
+                    images.get(i).updateMesh();
+                    i++;
+                }
+            }
         }
     }
 

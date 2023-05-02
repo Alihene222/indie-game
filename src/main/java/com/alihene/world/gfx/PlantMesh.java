@@ -22,6 +22,7 @@ public class PlantMesh {
     private Shader shader;
     private final VertexArray vao;
     private final VertexBuffer vbo;
+    private boolean shouldBuffer = false;
 
     private final List<Texture> textures;
 
@@ -45,7 +46,7 @@ public class PlantMesh {
         vao.bind();
 
         vbo.bind();
-        vbo.buffer(data, false);
+        vbo.buffer(PLANT_MESH_MAX_SIZE * PLANT_MESH_VERTEX_SIZE * 4, false);
 
         IndexBuffer ibo = new IndexBuffer();
         ibo.bind();
@@ -69,6 +70,10 @@ public class PlantMesh {
 
     public void meshAt(int index) {
         Plant plant = plants.get(index);
+
+        if(!shouldBuffer) {
+            shouldBuffer = true;
+        }
 
         int texId = 16;
 
@@ -120,8 +125,11 @@ public class PlantMesh {
     }
 
     public void render() {
-        vbo.bind();
-        vbo.buffer(data, false);
+        if(shouldBuffer) {
+            vbo.bind();
+            vbo.bufferSub(data);
+            shouldBuffer = false;
+        }
 
         int iterations;
         iterations = (int) Math.ceil((float) textures.size() / 16.0f);

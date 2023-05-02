@@ -27,4 +27,8 @@ public class GuiCharacter {
     public float getAdvance() {
         return advance;
     }
+
+    public Vector2i getTexturePos() {
+        return texturePos;
+    }
 }
