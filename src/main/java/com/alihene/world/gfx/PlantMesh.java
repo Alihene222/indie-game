@@ -5,6 +5,7 @@ import com.alihene.gfx.*;
 import com.alihene.world.gameobject.plant.Plant;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.lwjgl.opengl.GL33.*;
@@ -46,19 +47,16 @@ public class PlantMesh {
         vao.bind();
 
         vbo.bind();
-        vbo.buffer(PLANT_MESH_MAX_SIZE * PLANT_MESH_VERTEX_SIZE * 4, false);
+        vbo.buffer(PLANT_MESH_MAX_SIZE * PLANT_MESH_VERTEX_SIZE * 4, true);
 
         IndexBuffer ibo = new IndexBuffer();
         ibo.bind();
         generateIndices();
         ibo.buffer(indices);
 
-        glVertexAttribPointer(0, 3, GL_FLOAT, false, PLANT_MESH_VERTEX_SIZE_BYTES, 0);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(1, 2, GL_FLOAT, false, PLANT_MESH_VERTEX_SIZE_BYTES, 3 * Float.BYTES);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(2, 1, GL_FLOAT, false, PLANT_MESH_VERTEX_SIZE_BYTES, 5 * Float.BYTES);
-        glEnableVertexAttribArray(2);
+        vao.attrib(0, 3, GL_FLOAT, PLANT_MESH_VERTEX_SIZE_BYTES, 0);
+        vao.attrib(1, 2, GL_FLOAT, PLANT_MESH_VERTEX_SIZE_BYTES, 3 * Float.BYTES);
+        vao.attrib(2, 1, GL_FLOAT, PLANT_MESH_VERTEX_SIZE_BYTES, 5 * Float.BYTES);
     }
 
     public void mesh() {
@@ -118,8 +116,6 @@ public class PlantMesh {
             data[offset + 3] = ((xAdd / plant.getTextureInfo().totalSize.x) * plant.getTextureInfo().size.x) + ((float) plant.getTextureInfo().pos.x / plant.getTextureInfo().totalSize.x);
             data[offset + 4] = ((yAdd / plant.getTextureInfo().totalSize.y) * plant.getTextureInfo().size.y) + ((float) plant.getTextureInfo().pos.y / plant.getTextureInfo().totalSize.y);
 
-            System.out.println(plant.getTextureInfo().pos);
-
             data[offset + 5] = texId;
 
             offset += PLANT_MESH_VERTEX_SIZE;
@@ -155,15 +151,8 @@ public class PlantMesh {
             }
 
             vao.bind();
-            glEnableVertexAttribArray(0);
-            glEnableVertexAttribArray(1);
-            glEnableVertexAttribArray(2);
 
             glDrawElements(GL_TRIANGLES, plantCount * 6, GL_UNSIGNED_INT, 0);
-
-            glDisableVertexAttribArray(0);
-            glDisableVertexAttribArray(1);
-            glDisableVertexAttribArray(2);
 
             vao.unbind();
 

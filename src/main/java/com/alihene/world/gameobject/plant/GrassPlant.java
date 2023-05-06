@@ -1,6 +1,5 @@
 package com.alihene.world.gameobject.plant;
 
-import com.alihene.Main;
 import com.alihene.gfx.Texture;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
@@ -12,7 +11,6 @@ public class GrassPlant extends Herb {
 
     public GrassPlant(Vector2f pos, Vector2f size) {
         super(pos, size);
-        setTexture(Main.game.renderSystem.getTextureByName("plants"));
     }
 
     @Override

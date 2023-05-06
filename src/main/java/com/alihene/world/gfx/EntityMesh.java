@@ -53,12 +53,9 @@ public class EntityMesh {
         generateIndices();
         ibo.buffer(indices);
 
-        glVertexAttribPointer(0, 3, GL_FLOAT, false, ENTITY_MESH_VERTEX_SIZE_BYTES, 0);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(1, 2, GL_FLOAT, false, ENTITY_MESH_VERTEX_SIZE_BYTES, 3 * Float.BYTES);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(2, 1, GL_FLOAT, false, ENTITY_MESH_VERTEX_SIZE_BYTES, 5 * Float.BYTES);
-        glEnableVertexAttribArray(2);
+        vao.attrib(0, 3, GL_FLOAT, ENTITY_MESH_VERTEX_SIZE_BYTES, 0);
+        vao.attrib(1, 2, GL_FLOAT, ENTITY_MESH_VERTEX_SIZE_BYTES, 3 * Float.BYTES);
+        vao.attrib(2, 1, GL_FLOAT, ENTITY_MESH_VERTEX_SIZE_BYTES, 5 * Float.BYTES);
     }
 
     public void meshAt(int index) {

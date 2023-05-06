@@ -1,5 +1,6 @@
 package com.alihene.world.gameobject.plant;
 
+import com.alihene.Main;
 import com.alihene.world.PlantCollection;
 import com.alihene.world.gameobject.Gameobject;
 import com.alihene.world.gfx.PlantMesh;
@@ -12,6 +13,7 @@ public abstract class Plant extends Gameobject {
 
     public Plant(Vector2f pos, Vector2f size) {
         super(pos, size);
+        setTexture(Main.game.renderSystem.getTextureByName("plants"));
     }
 
     @Override

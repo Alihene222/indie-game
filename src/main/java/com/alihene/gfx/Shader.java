@@ -20,7 +20,7 @@ public class Shader {
 
         String vertexSource = readFile(vertexFilePath);
         String fragmentSource = readFile(fragmentFilePath);
-
+	
         int result = GL_FALSE;
         int infoLogLength;
 

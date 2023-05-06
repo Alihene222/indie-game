@@ -41,16 +41,7 @@ public class Window {
         aspectRatio = (float) width / (float) height;
 
         mousePosition = new Vector2f(0.0f, 0.0f);
-
-        glfwSetFramebufferSizeCallback(handle, new GLFWFramebufferSizeCallback() {
-            @Override
-            public void invoke(long l, int i, int i1) {
-                aspectRatio = (float) i / (float) i1;
-                GL33.glViewport(0, 0, i, i1);
-            }
-        });
-
-        glfwSetCursorPosCallback(handle, new GLFWCursorPosCallback() {
+	    glfwSetCursorPosCallback(handle, new GLFWCursorPosCallback() {
             @Override
             public void invoke(long l, double xPos, double yPos) {
                 mousePosition.x = (float) xPos;
